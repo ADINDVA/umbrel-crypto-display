@@ -8,14 +8,15 @@ import time
 cryptos=["btc", "eth", "ada"]
 priceurl="https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&symbols="
 outputFolder="/home/umbrel/umbrel-crypto-display/images/"
-colorRed=ImageColor.getrgb("#32CD30")
-colorGreen=ImageColor.getrgb("#32CD30")
-colorGold=ImageColor.getrgb("#32CD30")
-colorD9D9D9=ImageColor.getrgb("#32CD30")
-color404040=ImageColor.getrgb("#32CD30")
-color40FF40=ImageColor.getrgb("#32CD30")
-color000000=ImageColor.getrgb("#32CD30")
-colorFFFFFF=ImageColor.getrgb("#000000")
+colorRed=ImageColor.getrgb("#FF0000") red
+colorGreen=ImageColor.getrgb("#32CD30") green
+colorGold=ImageColor.getrgb("#FFD700") orange
+colorD9D9D9=ImageColor.getrgb("#D9D9D9") grey
+color404040=ImageColor.getrgb("#404040") grey
+color40FF40=ImageColor.getrgb("#40FF40") green
+color000000=ImageColor.getrgb("#000000") black
+colorFFFFFF=ImageColor.getrgb("#ffffff") white 
+color6CCFF0=ImageColor.getrgb("#6ccff0")
 fontDeja12=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",12)
 fontDeja16=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",16)
 fontDeja20=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",20)
@@ -34,7 +35,7 @@ def drawsatssquare(draw,dc,dr,spf,satw,bpx,bpy):
                 tly = (bpy + (dr*11*satw) + (y*satw))
                 brx = tlx+satw-2
                 bry = tly+satw-2
-                draw.rectangle(xy=((tlx,tly),(brx,bry)),fill=color40FF40)
+                draw.rectangle(xy=((tlx,tly),(brx,bry)),fill=color000000) 
             satsleft = satsleft - 1
 
 def getdateandtime():
@@ -52,29 +53,29 @@ def getfont(size):
     if size == 128:
         return fontDeja128
 
-def drawcenteredtext(draw, s, fontsize, x, y, textcolor=colorFFFFFF):
+def drawcenteredtext(draw, s, fontsize, x, y, textcolor=color6CCFF0): 
     thefont = getfont(fontsize)
     sw,sh = draw.textsize(s, thefont)
     ox,oy = thefont.getoffset(s)
     sw += ox
     sh += oy
-    draw.text(xy=(x-(sw/2),y-(sh/2)), text=s, font=thefont, fill=textcolor)
+    draw.text(xy=(x-(sw/2),y-(sh/2)), text=s, font=thefont, fill=textcolor) 
 
-def drawbottomlefttext(draw, s, fontsize, x, y, textcolor=colorFFFFFF):
+def drawbottomlefttext(draw, s, fontsize, x, y, textcolor=color6CCFF0): 
     thefont = getfont(fontsize)
     sw,sh = draw.textsize(s, thefont)
     ox,oy = thefont.getoffset(s)
     sw += ox
     sh += oy
-    draw.text(xy=(x,y-sh), text=s, font=thefont, fill=textcolor)
+    draw.text(xy=(x,y-sh), text=s, font=thefont, fill=textcolor) 
 
-def drawbottomrighttext(draw, s, fontsize, x, y, textcolor=colorFFFFFF):
+def drawbottomrighttext(draw, s, fontsize, x, y, textcolor=color6CCFF0): 
     thefont = getfont(fontsize)
     sw,sh = draw.textsize(s, thefont)
     ox,oy = thefont.getoffset(s)
     sw += ox
     sh += oy
-    draw.text(xy=(x-sw,y-sh), text=s, font=thefont, fill=textcolor)
+    draw.text(xy=(x-sw,y-sh), text=s, font=thefont, fill=textcolor) 
 
 def createimage(ticker, width=480, height=320):
     name,last,high,low,percentage = getpriceinfo(ticker)
@@ -83,17 +84,17 @@ def createimage(ticker, width=480, height=320):
     padtop=40
     im = Image.new(mode="RGB", size=(width, height))
     draw = ImageDraw.Draw(im)
-    drawcenteredtext(draw, str(last), 128, int(width/2), int(height/2), colorD9D9D9)
-    drawcenteredtext(draw, str(last), 128, int(width/2)-2, int(height/2)-2, colorFFFFFF)
-    drawcenteredtext(draw, name + " price:", 24, int(width/2), int(padtop/2))
+    drawcenteredtext(draw, str(last), 128, int(width/2), int(height/2), color6CCFF0) 
+    drawcenteredtext(draw, str(last), 128, int(width/2)-2, int(height/2)-2, color6CCFF0) 
+    drawcenteredtext(draw, "₿itcoin", 24, int(width/2), int(padtop/2))
     if percentage >= 0 :
-        drawcenteredtext(draw, "24h: " + str(percentage) + "%", 20, int(width/8*4), height-padtop, colorGreen)
+        drawcenteredtext(draw, "24h: " + str(percentage) + "%", 20, int(width/8*4), height-padtop, colorGreen) 
     if percentage < 0 :
-        drawcenteredtext(draw, "24h: " + str(percentage) + "%", 20, int(width/8*4), height-padtop, colorRed)
+        drawcenteredtext(draw, "24h: " + str(percentage) + "%", 20, int(width/8*4), height-padtop, colorRed) 
     drawcenteredtext(draw, "High: " + str(high), 20, int(width/8*7), height-padtop)
     drawcenteredtext(draw, "Low: " + str(low), 20, int(width/8*1), height-padtop)
-    drawbottomlefttext(draw, "Market data by coingecko", 16, 0, height, color40FF40)
-    drawbottomrighttext(draw, "as of " + getdateandtime(), 12, width, height)
+    drawbottomlefttext(draw, "₿y The People, For The People.", 16, 0, height, color6CCFF0) 
+    drawbottomrighttext(draw, getdateandtime(), 12, width, height)
     outputFile = outputFolder + ticker + ".png"
     im.save(outputFile)
 
