@@ -8,14 +8,14 @@ import time
 cryptos=["btc", "eth", "ada"]
 priceurl="https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&symbols="
 outputFolder="/home/umbrel/umbrel-crypto-display/images/"
-colorRed=ImageColor.getrgb("#FF0000") red
-colorGreen=ImageColor.getrgb("#32CD30") green
-colorGold=ImageColor.getrgb("#FFD700") orange
-colorD9D9D9=ImageColor.getrgb("#D9D9D9") grey
-color404040=ImageColor.getrgb("#404040") grey
-color40FF40=ImageColor.getrgb("#40FF40") green
-color000000=ImageColor.getrgb("#000000") black
-colorFFFFFF=ImageColor.getrgb("#ffffff") white 
+colorRed=ImageColor.getrgb("#FF0000") 
+colorGreen=ImageColor.getrgb("#32CD30") 
+colorGold=ImageColor.getrgb("#FFD700") 
+colorD9D9D9=ImageColor.getrgb("#D9D9D9") 
+color404040=ImageColor.getrgb("#404040") 
+color40FF40=ImageColor.getrgb("#40FF40") 
+color000000=ImageColor.getrgb("#000000") 
+colorFFFFFF=ImageColor.getrgb("#ffffff") 
 color6CCFF0=ImageColor.getrgb("#6ccff0")
 fontDeja12=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",12)
 fontDeja16=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",16)
